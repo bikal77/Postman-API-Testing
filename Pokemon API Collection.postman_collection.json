@@ -1,0 +1,346 @@
+{
+	"info": {
+		"_postman_id": "2bc6444d-385d-421e-9a03-7d401df8ca36",
+		"name": "Pokemon API Collection",
+		"description": "This is an assignment of me for testing with Postman.Also,this collection contains requests created for the API Testing assignment, aiming to demonstrate skills in testing RESTful APIs using Postman. It includes requests for checking GET and POST methods, validating response status codes, headers, and payload data. The collection also includes scripts for automated testing of query parameters and form data. The environment configuration allows for flexible testing across different endpoints.",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "39448589"
+	},
+	"item": [
+		{
+			"name": "Test Response",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://pokeapi.co/api/v2/pokemon/ditto?limit=10&offset=20",
+					"protocol": "https",
+					"host": [
+						"pokeapi",
+						"co"
+					],
+					"path": [
+						"api",
+						"v2",
+						"pokemon",
+						"ditto"
+					],
+					"query": [
+						{
+							"key": "limit",
+							"value": "10"
+						},
+						{
+							"key": "offset",
+							"value": "20"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Check for Valid Query  Params",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"No unexpected query parameters\", function () {\r",
+							"    const queryParams = pm.request.url.query.all();\r",
+							"    pm.expect(queryParams.length).to.eql(0);  // Ensures no query parameters are sent\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "https://pokeapi.co/api/v2/pokemon/ditto",
+					"protocol": "https",
+					"host": [
+						"pokeapi",
+						"co"
+					],
+					"path": [
+						"api",
+						"v2",
+						"pokemon",
+						"ditto"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Test for Invalid Parameters",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://pokeapi.co/api/v2/pokemon/ditto?type=fire",
+					"protocol": "https",
+					"host": [
+						"pokeapi",
+						"co"
+					],
+					"path": [
+						"api",
+						"v2",
+						"pokemon",
+						"ditto"
+					],
+					"query": [
+						{
+							"key": "type",
+							"value": "fire"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DittooData",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							" pm.test(\"Validate specific fields in response\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.name).to.eql(\"ditto\");\r",
+							"    pm.expect(jsonData.id).to.eql(132);\r",
+							"    pm.expect(jsonData.base_experience).to.eql(101);\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							" \r",
+							"\r",
+							"pm.test(\"Response status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"\r",
+							"pm.test(\"Validate the structure of the response JSON against the expected schema\", function () {\r",
+							"    const responseData = pm.response.json();\r",
+							"    \r",
+							"    pm.expect(responseData).to.be.an('object');\r",
+							"    pm.expect(responseData.abilities).to.be.an('array');\r",
+							"    pm.expect(responseData.base_experience).to.be.a('number');\r",
+							"    pm.expect(responseData.cries).to.be.an('object');\r",
+							"    pm.expect(responseData.forms).to.be.an('array');\r",
+							"    pm.expect(responseData.game_indices).to.be.an('array');\r",
+							"    pm.expect(responseData.height).to.be.a('number');\r",
+							"    pm.expect(responseData.held_items).to.be.an('array');\r",
+							"    pm.expect(responseData.id).to.be.a('number');\r",
+							"    pm.expect(responseData.is_default).to.be.a('boolean');\r",
+							"    pm.expect(responseData.location_area_encounters).to.be.a('string');\r",
+							"    pm.expect(responseData.moves).to.be.an('array');\r",
+							"    pm.expect(responseData.name).to.be.a('string');\r",
+							"    pm.expect(responseData.order).to.be.a('number');\r",
+							"    pm.expect(responseData.past_abilities).to.be.an('array');\r",
+							"    pm.expect(responseData.past_types).to.be.an('array');\r",
+							"    pm.expect(responseData.species).to.be.an('object');\r",
+							"    pm.expect(responseData.sprites).to.be.an('object');\r",
+							"    pm.expect(responseData.stats).to.be.an('array');\r",
+							"    pm.expect(responseData.types).to.be.an('array');\r",
+							"    pm.expect(responseData.weight).to.be.a('number');\r",
+							"});\r",
+							"\r",
+							"\r",
+							"pm.test(\"Response time is less than 200ms\", function () {\r",
+							"  pm.expect(pm.response.responseTime).to.be.below(200);\r",
+							"});\r",
+							"\r",
+							"\r",
+							"pm.test(\"All required fields are present in the response\", function () {\r",
+							"    const responseData = pm.response.json();\r",
+							"\r",
+							"    pm.expect(responseData).to.be.an('object');\r",
+							"    pm.expect(responseData.abilities).to.exist.and.to.be.an('array');\r",
+							"    pm.expect(responseData.base_experience).to.exist;\r",
+							"    pm.expect(responseData.cries).to.exist.and.to.be.an('object');\r",
+							"    pm.expect(responseData.forms).to.exist.and.to.be.an('array');\r",
+							"    pm.expect(responseData.game_indices).to.exist.and.to.be.an('array');\r",
+							"    pm.expect(responseData.height).to.exist;\r",
+							"    pm.expect(responseData.held_items).to.exist.and.to.be.an('array');\r",
+							"    pm.expect(responseData.id).to.exist;\r",
+							"    pm.expect(responseData.is_default).to.exist;\r",
+							"    pm.expect(responseData.location_area_encounters).to.exist;\r",
+							"    pm.expect(responseData.moves).to.exist.and.to.be.an('array');\r",
+							"    pm.expect(responseData.name).to.exist;\r",
+							"    pm.expect(responseData.order).to.exist;\r",
+							"    pm.expect(responseData.past_abilities).to.exist.and.to.be.an('array');\r",
+							"    pm.expect(responseData.past_types).to.exist.and.to.be.an('array');\r",
+							"    pm.expect(responseData.species).to.exist.and.to.be.an('object');\r",
+							"    pm.expect(responseData.sprites).to.exist.and.to.be.an('object');\r",
+							"    pm.expect(responseData.stats).to.exist.and.to.be.an('array');\r",
+							"    pm.expect(responseData.types).to.exist.and.to.be.an('array');\r",
+							"    pm.expect(responseData.weight).to.exist;\r",
+							"});\r",
+							"\r",
+							"\r",
+							"pm.test(\"Types array is present and contains the expected number of elements\", function () {\r",
+							"    const responseData = pm.response.json();\r",
+							"\r",
+							"    pm.expect(responseData).to.be.an('object');\r",
+							"    pm.expect(responseData.types).to.exist.and.to.be.an('array');\r",
+							"    pm.expect(responseData.types).to.have.lengthOf.at.least(1);\r",
+							"});\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://pokeapi.co/api/v2/pokemon/ditto",
+					"protocol": "https",
+					"host": [
+						"pokeapi",
+						"co"
+					],
+					"path": [
+						"api",
+						"v2",
+						"pokemon",
+						"ditto"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Response Validation Script",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Validate specific fields in response\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.name).to.eql(\"ditto\");\r",
+							"    pm.expect(jsonData.id).to.eql(132);\r",
+							"    pm.expect(jsonData.base_experience).to.eql(101);\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://pokeapi.co/api/v2/pokemon/ditto",
+					"protocol": "https",
+					"host": [
+						"pokeapi",
+						"co"
+					],
+					"path": [
+						"api",
+						"v2",
+						"pokemon",
+						"ditto"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DittooData Validation",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							" pm.test(\"Validate specific fields in response\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"\r",
+							"    // Check if the name in the response is 'ditto'\r",
+							"    pm.expect(jsonData.name).to.eql(\"ditto\");\r",
+							"\r",
+							"    // Check if the ID in the response is 132\r",
+							"    pm.expect(jsonData.id).to.eql(132);\r",
+							"\r",
+							"    // Check if the base experience in the response is 101\r",
+							"    pm.expect(jsonData.base_experience).to.eql(101);\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"// Check that the name is \"ditto\"\r",
+							"pm.test(\"Name should be 'ditto'\", function () {\r",
+							"    const jsonData = pm.response.json(); // Parses the response JSON\r",
+							"    pm.expect(jsonData.name).to.eql(\"ditto\"); // Check if \"name\" is \"ditto\"\r",
+							"});\r",
+							"\r",
+							"// Check that the id is 132\r",
+							"pm.test(\"ID should be 132\", function () {\r",
+							"    const jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.id).to.eql(132); // Check if \"id\" is 132\r",
+							"});\r",
+							"\r",
+							"// Check that the type is \"normal\"\r",
+							"pm.test(\"Type should be 'normal'\", function () {\r",
+							"    const jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.type).to.eql(\"normal\"); // Check if \"type\" is \"normal\"\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://pokeapi.co/api/v2/pokemon/ditto",
+					"protocol": "https",
+					"host": [
+						"pokeapi",
+						"co"
+					],
+					"path": [
+						"api",
+						"v2",
+						"pokemon",
+						"ditto"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

@@ -1,0 +1,73 @@
+{
+	"info": {
+		"_postman_id": "0b7e771a-1a43-46a3-97f7-f4f78aa9f66f",
+		"name": "JSONPlaceholder",
+		"description": "Writing test scripts like adding a new request to the collection to create a new resource (e.g., a new post).\n\nAlso writing a test script to verify the response status code (should be 201 for successful resource creation).\n\nAnd executing the request and observing the test results.",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "39448589"
+	},
+	"item": [
+		{
+			"name": "Post request for testing",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							" pm.test(\"Status code is 900\", function () {\r",
+							"    pm.response.to.have.status(900);\r",
+							"});\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							" console.log(\"Running Pre-request Script\");\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"title\": \"Post title\",\r\n    \"body\": \"This is a new post.\",\r\n    \"userId\": 1\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://jsonplaceholder.typicode.com/posts?Content-Type=application/json",
+					"protocol": "https",
+					"host": [
+						"jsonplaceholder",
+						"typicode",
+						"com"
+					],
+					"path": [
+						"posts"
+					],
+					"query": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

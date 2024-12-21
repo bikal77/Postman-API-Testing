@@ -1,0 +1,163 @@
+{
+	"info": {
+		"_postman_id": "e636ebd6-589f-42da-ac9c-b3fb0f8214c4",
+		"name": "Telegram Bot API",
+		"description": "This is my API request collection for Telegram Bot I created.",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "39448589"
+	},
+	"item": [
+		{
+			"name": "GetBotInfo",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://api.telegram.org/bot8095290451:AAG4wOt9JfWSYka1VJVHz1h8W8Q0vhay1-Q/getMe",
+					"protocol": "https",
+					"host": [
+						"api",
+						"telegram",
+						"org"
+					],
+					"path": [
+						"bot8095290451:AAG4wOt9JfWSYka1VJVHz1h8W8Q0vhay1-Q",
+						"getMe"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Message Updates",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://api.telegram.org/bot8095290451:AAG4wOt9JfWSYka1VJVHz1h8W8Q0vhay1-Q/getUpdates",
+					"protocol": "https",
+					"host": [
+						"api",
+						"telegram",
+						"org"
+					],
+					"path": [
+						"bot8095290451:AAG4wOt9JfWSYka1VJVHz1h8W8Q0vhay1-Q",
+						"getUpdates"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Testing Messages",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"chat_id\": \"6495528661\",\r\n  \"text\": \"Is this bot Ok?\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://api.telegram.org/bot8095290451:AAG4wOt9JfWSYka1VJVHz1h8W8Q0vhay1-Q/sendMessage",
+					"protocol": "https",
+					"host": [
+						"api",
+						"telegram",
+						"org"
+					],
+					"path": [
+						"bot8095290451:AAG4wOt9JfWSYka1VJVHz1h8W8Q0vhay1-Q",
+						"sendMessage"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Interaction and UI Request",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "chat_id",
+							"value": "6495528661",
+							"type": "text"
+						},
+						{
+							"key": "action",
+							"value": "typing",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "https://api.telegram.org/bot8095290451:AAG4wOt9JfWSYka1VJVHz1h8W8Q0vhay1-Q/sendChatAction",
+					"protocol": "https",
+					"host": [
+						"api",
+						"telegram",
+						"org"
+					],
+					"path": [
+						"bot8095290451:AAG4wOt9JfWSYka1VJVHz1h8W8Q0vhay1-Q",
+						"sendChatAction"
+					],
+					"query": [
+						{
+							"key": "",
+							"value": "",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Chat Management Request",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "chat_id",
+							"value": "6495528661",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "https://api.telegram.org/bot8095290451:AAG4wOt9JfWSYka1VJVHz1h8W8Q0vhay1-Q/getChat?chat_id=6495528661",
+					"protocol": "https",
+					"host": [
+						"api",
+						"telegram",
+						"org"
+					],
+					"path": [
+						"bot8095290451:AAG4wOt9JfWSYka1VJVHz1h8W8Q0vhay1-Q",
+						"getChat"
+					],
+					"query": [
+						{
+							"key": "chat_id",
+							"value": "6495528661"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

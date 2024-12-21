@@ -1,0 +1,33 @@
+{
+	"info": {
+		"_postman_id": "80d15a9c-6869-42e6-9c4f-70cc7132f11d",
+		"name": "Bikalko",
+		"description": "For organizing requests into collection",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "39448589"
+	},
+	"item": [
+		{
+			"name": "DittooData",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://pokeapi.co/api/v2/pokemon/ditto",
+					"protocol": "https",
+					"host": [
+						"pokeapi",
+						"co"
+					],
+					"path": [
+						"api",
+						"v2",
+						"pokemon",
+						"ditto"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
